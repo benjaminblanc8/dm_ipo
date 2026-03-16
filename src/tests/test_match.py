@@ -89,14 +89,14 @@ def test_match_best_of_invalide():
 
 
 def test_match_equipe_1_invalide():
-    e1, e2 = equipes_valides()
+    e2 = equipes_valides()
 
     with pytest.raises(ValueError):
         Match(3, "pas une equipe", e2)
 
 
 def test_match_equipe_2_invalide():
-    e1, e2 = equipes_valides()
+    e1 = equipes_valides()
 
     with pytest.raises(ValueError):
         Match(3, e1, "pas une equipe")
@@ -117,7 +117,7 @@ def test_match_score_equipe_2_invalide():
 
 
 def test_match_ajouter_equipe_1():
-    e1, e2 = equipes_valides()
+    e1 = equipes_valides()
 
     m = Match(3)
     m.ajouter_equipe_1(e1)

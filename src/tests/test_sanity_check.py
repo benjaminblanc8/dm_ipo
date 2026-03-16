@@ -20,7 +20,7 @@ from ..tournoi import Tournoi
 
 def test_verifier_personne():
     # Signature de la méthode __init__()
-    signature_init = inspect.signature(getattr(_Personne, "__init__"))
+    signature_init = inspect.signature(_Personne.__init__)
     assert tuple(signature_init.parameters.keys()) == (
         "self",
         "pseudo",
@@ -34,7 +34,7 @@ def test_verifier_personne():
 
     # Attribut privé pseudo
     assert hasattr(personne, "_Personne__pseudo") and not callable(
-        getattr(personne, "_Personne__pseudo")
+        personne._Personne__pseudo
     ), "La classe _Personne n'a pas l'attribut privé 'pseudo'."
 
     # Propriété pseudo
@@ -60,7 +60,7 @@ def test_verifier_coach():
 
 def test_verifier_equipe():
     # Signature de la méthode __init__()
-    signature_init = inspect.signature(getattr(Equipe, "__init__"))
+    signature_init = inspect.signature(Equipe.__init__)
     assert tuple(signature_init.parameters.keys()) == (
         "self",
         "nom_officiel",
@@ -111,7 +111,7 @@ def test_verifier_equipe():
 
 def test_verifier_match():
     # Signature de la méthode __init__()
-    signature_init = inspect.signature(getattr(Match, "__init__"))
+    signature_init = inspect.signature(Match.__init__)
     assert tuple(signature_init.parameters.keys()) == (
         "self",
         "best_of",
@@ -162,7 +162,7 @@ def test_verifier_match():
         ), f"La classe Match n'a pas la méthode publique {methode!r}."
 
     # Signature de la méthode ajouter_equipe_1()
-    signature_ajouter_equipe_1 = inspect.signature(getattr(Match, "ajouter_equipe_1"))
+    signature_ajouter_equipe_1 = inspect.signature(Match.ajouter_equipe_1)
     assert tuple(signature_ajouter_equipe_1.parameters.keys()) == (
         "self",
         "equipe_1",
@@ -173,7 +173,7 @@ def test_verifier_match():
     )
 
     # Signature de la méthode ajouter_equipe_2()
-    signature_ajouter_equipe_2 = inspect.signature(getattr(Match, "ajouter_equipe_2"))
+    signature_ajouter_equipe_2 = inspect.signature(Match.ajouter_equipe_2)
     assert tuple(signature_ajouter_equipe_2.parameters.keys()) == (
         "self",
         "equipe_2",
@@ -184,7 +184,7 @@ def test_verifier_match():
     )
 
     # Signature de la méthode ajouter_equipes()
-    signature_ajouter_equipes = inspect.signature(getattr(Match, "ajouter_equipes"))
+    signature_ajouter_equipes = inspect.signature(Match.ajouter_equipes)
     assert tuple(signature_ajouter_equipes.parameters.keys()) == (
         "self",
         "equipe_1",
@@ -196,7 +196,7 @@ def test_verifier_match():
     )
 
     # Signature de la méthode ajouter_scores()
-    signature_ajouter_scores = inspect.signature(getattr(Match, "ajouter_scores"))
+    signature_ajouter_scores = inspect.signature(Match.ajouter_scores)
     assert tuple(signature_ajouter_scores.parameters.keys()) == (
         "self",
         "score_equipe_1",
@@ -208,7 +208,7 @@ def test_verifier_match():
     )
 
     # Signature de la méthode ajouter_equipes_et_scores()
-    signature_ajouter_equipes_et_scores = inspect.signature(getattr(Match, "ajouter_equipes_et_scores"))
+    signature_ajouter_equipes_et_scores = inspect.signature(Match.ajouter_equipes_et_scores)
     assert tuple(signature_ajouter_equipes_et_scores.parameters.keys()) == (
         "self",
         "equipe_1",
@@ -229,7 +229,7 @@ def test_verifier_competition():
     assert issubclass(Competition, ABC), "La classe Competition n'est pas abstraite."
 
     # Signature de la méthode ajouter_equipes()
-    signature_ajouter_equipes = inspect.signature(getattr(Competition, "ajouter_equipes"))
+    signature_ajouter_equipes = inspect.signature(Competition.ajouter_equipes)
     assert tuple(signature_ajouter_equipes.parameters.keys()) == (
         "self",
         "equipes",
@@ -258,11 +258,11 @@ def test_verifier_phase():
     assert issubclass(Phase, ABC), "La classe Phase n'est pas abstraite."
 
     # Méthodes redéfinies
-    assert hasattr(Phase, "__init__") and getattr(Phase, "__init__") is not getattr(
-        object, "__init__"
+    assert (
+        hasattr(Phase, "__init__") and Phase.__init__ is not object.__init__
     ), "La classe Phase ne redéfinit pas la méthode '__init__'."
-    assert hasattr(Phase, "simuler") and getattr(Phase, "simuler") is not getattr(
-        Competition, "simuler"
+    assert (
+        hasattr(Phase, "simuler") and Phase.simuler is not Competition.simuler
     ), "La classe Phase ne redéfinit pas la méthode 'simuler'."
 
     # Méthodes abstraites
@@ -365,7 +365,7 @@ def test_verifier_tournoi():
     assert issubclass(Tournoi, ABC), "La classe Tournoi n'est pas abstraite."
 
     # Signature de la méthode __init__()
-    signature_init = inspect.signature(getattr(Tournoi, "__init__"))
+    signature_init = inspect.signature(Tournoi.__init__)
     assert tuple(signature_init.parameters.keys()) == (
         "self",
         "n_equipes",
@@ -443,15 +443,13 @@ def test_verifier_msi2024():
     # Méthodes de Competition redéfinies
     methodes_competition_redefinies = ("simuler", "renvoyer_classement", "renvoyer_resultats_str")
     for methode in methodes_competition_redefinies:
-        assert (
-            callable(getattr(MSI2024, f"{methode}", None)) and
-            getattr(MSI2024, methode) is not getattr(Competition, methode)
+        assert callable(getattr(MSI2024, f"{methode}", None)) and getattr(MSI2024, methode) is not getattr(
+            Competition, methode
         ), f"La classe MSI2024 ne redéfinit pas la méthode publique {methode!r}."
 
     # Méthodes de Tournoi redéfinies
     methodes_tournoi_redefinies = ("renvoyer_classement_str",)
     for methode in methodes_tournoi_redefinies:
-        assert (
-            callable(getattr(MSI2024, f"{methode}", None)) and
-            getattr(MSI2024, methode, False) is not getattr(Tournoi, methode, True)
+        assert callable(getattr(MSI2024, f"{methode}", None)) and getattr(MSI2024, methode, False) is not getattr(
+            Tournoi, methode, True
         ), f"La classe MSI2024 ne redéfinit pas la méthode publique {methode!r}."

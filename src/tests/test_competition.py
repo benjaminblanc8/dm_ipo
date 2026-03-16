@@ -19,7 +19,7 @@ from ..msi_2024_playin import MSI2024PlayIn
     ],
 )
 def test_competition_places(competition, resultat_attendu):
-    competition.renvoyer_places() == resultat_attendu
+    assert competition.renvoyer_places() == resultat_attendu
 
 
 @pytest.mark.parametrize(
