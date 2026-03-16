@@ -35,7 +35,7 @@ class MSI2024(Tournoi):
         lar_prix: int = max(len(value) for value in cagnotte_str_dollar.values())  # largeur pour les prix
 
         # Equipe
-        lar_eq: int = max(len(equipe.nom_officiel) for equipe in self._equipes.values())  # largeur pour les équipes
+        lar_eq: int = max(len(equipe.__nom_officiel) for equipe in self._equipes.values())  # largeur pour les équipes
 
         string_list = [
             r"=========                            ",
@@ -45,29 +45,29 @@ class MSI2024(Tournoi):
             r" ——————————————————————————————————— ",
             f'| Place | {"Prix":^{lar_prix}} | {"Équipe":<{lar_eq}} |',
             r"|———————|—————————|—————————————————|",
-            f'|   1   | {cagnotte_str_dollar["1"]:^{lar_prix}} | {classement_sorted["1"].pop(0).nom_officiel:<{lar_eq}} |',  # noqa: E501
+            f'|   1   | {cagnotte_str_dollar["1"]:^{lar_prix}} | {classement_sorted["1"].pop(0).__nom_officiel:<{lar_eq}} |',  # noqa: E501
             r"|———————|—————————|—————————————————|",
-            f'|   2   | {cagnotte_str_dollar["2"]:^{lar_prix}} | {classement_sorted["2"].pop(0).nom_officiel:<{lar_eq}} |',  # noqa: E501
+            f'|   2   | {cagnotte_str_dollar["2"]:^{lar_prix}} | {classement_sorted["2"].pop(0).__nom_officiel:<{lar_eq}} |',  # noqa: E501
             r"|———————|—————————|—————————————————|",
-            f'|   3   | {cagnotte_str_dollar["3"]:^{lar_prix}} | {classement_sorted["3"].pop(0).nom_officiel:<{lar_eq}} |',  # noqa: E501
+            f'|   3   | {cagnotte_str_dollar["3"]:^{lar_prix}} | {classement_sorted["3"].pop(0).__nom_officiel:<{lar_eq}} |',  # noqa: E501
             r"|———————|—————————|—————————————————|",
-            f'|   4   | {cagnotte_str_dollar["4"]:^{lar_prix}} | {classement_sorted["4"].pop(0).nom_officiel:<{lar_eq}} |',  # noqa: E501
+            f'|   4   | {cagnotte_str_dollar["4"]:^{lar_prix}} | {classement_sorted["4"].pop(0).__nom_officiel:<{lar_eq}} |',  # noqa: E501
             r"|———————|—————————|—————————————————|",
-            f'|       |         | {classement_sorted["5-6"].pop(0).nom_officiel:<{lar_eq}} |',
+            f'|       |         | {classement_sorted["5-6"].pop(0).__nom_officiel:<{lar_eq}} |',
             f'|  5—6  | {cagnotte_str_dollar["5-6"]:^{lar_prix}} |—————————————————|',
-            f'|       |         | {classement_sorted["5-6"].pop(0).nom_officiel:<{lar_eq}} |',
+            f'|       |         | {classement_sorted["5-6"].pop(0).__nom_officiel:<{lar_eq}} |',
             r"|———————|—————————|—————————————————|",
-            f'|       |         | {classement_sorted["7-8"].pop(0).nom_officiel:<{lar_eq}} |',
+            f'|       |         | {classement_sorted["7-8"].pop(0).__nom_officiel:<{lar_eq}} |',
             f'|  7—8  | {cagnotte_str_dollar["7-8"]:^{lar_prix}} |—————————————————|',
-            f'|       |         | {classement_sorted["7-8"].pop(0).nom_officiel:<{lar_eq}} |',
+            f'|       |         | {classement_sorted["7-8"].pop(0).__nom_officiel:<{lar_eq}} |',
             r"|———————|—————————|—————————————————|",
-            f'|       |         | {classement_sorted["9-10"].pop(0).nom_officiel:<{lar_eq}} |',
+            f'|       |         | {classement_sorted["9-10"].pop(0).__nom_officiel:<{lar_eq}} |',
             f'| 9—10  | {cagnotte_str_dollar["9-10"]:^{lar_prix}} |—————————————————|',
-            f'|       |         | {classement_sorted["9-10"].pop(0).nom_officiel:<{lar_eq}} |',
+            f'|       |         | {classement_sorted["9-10"].pop(0).__nom_officiel:<{lar_eq}} |',
             r"|———————|—————————|—————————————————|",
-            f'|       |         | {classement_sorted["11-12"].pop(0).nom_officiel:<{lar_eq}} |',
+            f'|       |         | {classement_sorted["11-12"].pop(0).__nom_officiel:<{lar_eq}} |',
             f'| 11—12 | {cagnotte_str_dollar["11-12"]:^{lar_prix}} |—————————————————|',
-            f'|       |         | {classement_sorted["11-12"].pop(0).nom_officiel:<{lar_eq}} |',
+            f'|       |         | {classement_sorted["11-12"].pop(0).__nom_officiel:<{lar_eq}} |',
             r" ——————————————————————————————————— ",
         ]
 

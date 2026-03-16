@@ -1,5 +1,6 @@
 """Implémentation de la classe MSI2024Bracket."""
 
+from .equipe import Equipe
 from .match import Match
 from .phase import Phase
 
@@ -9,9 +10,13 @@ class MSI2024Bracket(Phase):
 
     Parameters
     ----------
-    equipes = dict[str, Equipe]
+    equipes : dict[str, Equipe]
         Équipes participant à la phase finale.
     """
+
+    def __init__(self, equipes: dict[str, Equipe]) -> None:
+        self._equipes = equipes
+        self._tableau: dict[str, dict[str, Match]] = self._TABLEAU_VIDE
 
     @property
     def _CHAPEAUX(self) -> dict[str, set[str]]:
